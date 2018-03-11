@@ -1,23 +1,22 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    
-    
-    <title> BambBoard</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+---
+layout: examples
+title: Examples
+description: Quickly get a project started with any of our examples ranging from using parts of the framework to custom components and layouts.
+redirect_from: "/examples/"
+---
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-  </head>
-  <body>
-    <h1>Welcome to BamBoard! Bamboard is a website application that allows people to store their art portfolios and collaborate on them!</h1>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="/js/jquery.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
-</html>
+{% for entry in site.data.examples %}
+  <h2>{{ entry.category | capitalize }}</h2>
+  <p>{{ entry.description }}</p>
+  {% for example in entry.examples %}
+    {% if forloop.first %}<div class="row">{% endif %}
+      <div class="col-sm-6 col-md-4 col-xl-3 mb-3">
+        <a href="{{ site.baseurl }}/docs/{{ site.docs_version }}/examples/{{ example.name | slugify }}/">
+          <img class="img-thumbnail mb-3" src="{{ site.baseurl }}/docs/{{ site.docs_version }}/examples/screenshots/{{ example.name | slugify }}.png" alt="{{ example.name }} screenshot" width="960" height="600">
+          <h5 class="mb-1">{{ example.name }}</h5>
+        </a>
+        <p class="text-muted">{{ example.description }}</p>
+      </div>
+    {% if forloop.last %}</div>{% endif %}
+  {% endfor %}
+{% endfor %}
